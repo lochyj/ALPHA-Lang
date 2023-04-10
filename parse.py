@@ -1,9 +1,4 @@
-types = [
-    "int",
-    "null",
-    "string",
-    "char"
-]
+
 
 def parse_line(line: str):
     
