@@ -1,7 +1,10 @@
-
-int main() {
-    int a = 1;
-    int b = 2;
-    int c = a + b;
-    log(c);
-}
+int 10 - 11
+int 10 * 10
+int 2 ^ 2
+int 10 & 10
+str Hello there this is nice!
+str I agree!
+char e
+null idk what to put here
+int $-5 + $-5
+int $-6 * 2
