@@ -8,7 +8,12 @@ types = [
     "str",
     "null",
     "fn",
+    "//"
 ];
+
+const = {
+    "PI": 3.1415926
+}
 
 output = {};
 output_index = 0;
@@ -29,6 +34,10 @@ for line in file_lines_array:
         exit();
     else:
         line_return_type = broken_line[0];
+    
+    if line_return_type == "//":
+        # Continue because it's a comment.
+        continue;
 
     if line_return_type == "int":
         if len(broken_line) < 4 or len(broken_line) > 4:
@@ -61,9 +70,19 @@ for line in file_lines_array:
                     val1 = int(broken_line[1]);
                 val2 = output[output_index - int(broken_line[3][2])];
         
+        if broken_line[1] in const:
+            val1 = const[broken_line[1]];
+            if not broken_line[3] in const:
+                val2 = int(broken_line[3]);
+        if broken_line[3] in const:
+            val2 = const[broken_line[3]];
+            if not broken_line[1] in const:
+                val1 = int(broken_line[1]);
+
         if not broken_line[1].startswith('$') and not broken_line[3].startswith('$'):
-            val1 = int(broken_line[1]);
-            val2 = int(broken_line[3]);
+            if broken_line[1] not in const and broken_line[3] not in const:
+                val1 = int(broken_line[1]);
+                val2 = int(broken_line[3]);
         
         operand = broken_line[2];
         match operand:
