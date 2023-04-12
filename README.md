@@ -49,7 +49,7 @@ int $-1 * 10
 
 ## Functions
 
-Functions will be limited to one line only and will allow logical operations such as `if` and `while` statements. However i am yet to implement this.
+Functions are limited to one line only and will allow logical operations such as `if` and `while` statements. However I am yet to implement function definitions
 
 Functions are defined with the `fn` type and will be placed before the return type of the function. e.g:
 ```rs
@@ -57,6 +57,28 @@ Functions are defined with the `fn` type and will be placed before the return ty
 fn null ...
 // Or
 fn int ...
+// Or any other return type
+```
+
+To call a function you simply use the `fn` type and then the name of the function. e.g:
+```rs
+str Hello, world!
+fn print $-1
+```
+
+In this case `print` is a builtin function that will print the value input to the console.
+
+There are many other builtin functions. They will be continually added to in the future.
+Here is the current list.<br>
+```
+sin
+cos
+tan
+print
+log
+log10
+sqrt
+ceil
 ```
 
 ## Notes
@@ -73,4 +95,15 @@ int 10 +10
 // Or any other combination of missing spaces
 ```
 
-Additionally, for syntax highlighting the best language to use is `c` as it is the closest to the ALPHA language.
+Additionally, for syntax highlighting the best language to use is `c` or `rust` as it is the closest to the ALPHA language.
+E.g:<br>
+`C`:
+```c
+int 10 + 10
+fn print $-1
+```
+`Rust`:
+```rs
+int 10 + 10
+fn print $-1
+```
