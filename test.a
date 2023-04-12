@@ -2,11 +2,5 @@
 
 int 2 * PI
 int $-1 * 10
-
-int 10 == 10
-
 str Hello there!
-
-null wow this is useless
-
-char E
+fn print $-1
