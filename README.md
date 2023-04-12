@@ -7,7 +7,7 @@ e.g:
 ```c
 int 10 + 10
 ```
-This specifies that the type of the line is an `int`eger and the value is `10 + 10`
+This specifies that the type of the line is an integer and the value is `10 + 10`
 
 For other types such as chars and strings we use the `char` and `str` keywords respectively. e.g:
 ```c
@@ -18,6 +18,26 @@ str Hello, World!
 Note:
 - The char type has to have only one input and that input must have a length of 1.
 - The str type can have 1 or more inputs and it will combine them into one string.
+
+## Mathematical, bitwise and comparison operators
+
+In ALPHA we have the following mathematical, bitwise and comparison operators:
+```c
+int 10 + 10 // Addition
+int 10 - 10 // Subtraction
+int 10 * 10 // Multiplication
+int 10 / 10 // Division
+int 10 % 10 // Modulus
+int 10 ^ 10 // Power
+int 10 & 10 // Bitwise AND
+int 10 | 10 // Bitwise OR
+int 10 == 10 // Equals
+int 10 != 10 // Not equals
+int 10 < 10 // Less than
+int 10 > 10 // Greater than
+int 10 <= 10 // Less than or equal to
+int 10 >= 10 // Greater than or equal to
+```
 
 ## Stack references
 

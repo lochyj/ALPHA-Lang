@@ -38,9 +38,6 @@ def parse_line_fncall(line: str):
         else:
             print(f"Interpreter error at: {line}, Unknown function call; Function neither builtin nor user defined.");
             exit();
-    elif split_line[1] in values.fn_types:
-        print(f"Interpreter error at: {line}, Function definitions aren't implemented yet.");
-        exit();
     else:
         print(f"Interpreter error at: {line}, Missing function call or definition.");
         exit();

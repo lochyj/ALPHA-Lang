@@ -1,10 +1,7 @@
-test = {
-    "PI": 3.1
-}
+# fn int add(x,y) x + y;
+line = "fn int add(x,y) x + y;"
+split_line = line.split(' ');
 
-tst = "1"
+fn_name = split_line[2].replace('(', ' ').split(' ')[0];
 
-if not tst in test:
-    print("yes")
-else:
-    print("no")
+print(fn_name);

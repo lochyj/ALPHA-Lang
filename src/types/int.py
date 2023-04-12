@@ -71,6 +71,8 @@ def parse_line_int(line: str):
             values.output[values.output_index] = input1 & input2;
         case '%':
             values.output[values.output_index] = input1 % input2;
+        case '|':
+            values.output[values.output_index] = input1 | input2;
         case '^':
             values.output[values.output_index] = input1 ** input2;
         case "==":
