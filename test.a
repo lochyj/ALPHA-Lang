@@ -1,6 +1,3 @@
-// Calculate the circumference of a circle with the radius of 10
-
-int 2 * PI
-int $-1 * 10
-str Hello there!
-fn print $-1
+int 10 + PI
+int $-1 + E
+str Wow this is nice!
