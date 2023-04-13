@@ -1,6 +1,2 @@
-int 10 + PI
-int $-1 + E
-str Wow this is nice!
-fn print $-1
-
-fn int pp (x,y) x+y;
+fn int add (x) return x + 10;
+fn add 10

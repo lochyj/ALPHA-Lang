@@ -38,5 +38,3 @@ def parse_line(line: str):
                 parse_line_fncall(line);
             elif split_line[1] in fn_types:
                 parse_line_fndefinition(line);
-            else:
-                print(f"Interpreter error at: {line}, Unknown function call or definition.");

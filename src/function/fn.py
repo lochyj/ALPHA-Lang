@@ -30,7 +30,7 @@ def parse_line_fncall(line: str):
                 tmp = None;
                 values.output_index += 1;
         elif split_line[1] in values.fn_user:
-            tmp = values.fn_user[split_line[1]](val);
+            exec(f"global tmp\ntmp = {values.fn_user[split_line[1]]}({val})", globals());
             if tmp != None:
                 values.output[values.output_index] = tmp;
                 tmp = None;
