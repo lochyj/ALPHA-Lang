@@ -74,9 +74,9 @@ Functions are limited to one line only and will allow logical operations such as
 Functions are defined with the `fn` type and will be placed before the return type of the function. e.g:
 ```rs
 // Yet to implement the rest...
-fn null ...
+fn null test (x) x
 // Or
-fn int ...
+fn int add (x) x + 10
 // Or any other return type
 ```
 
