@@ -1,47 +1,22 @@
-from src.builtin import *
+# Example variable: "a": {"value": 10, "type": "int"},
+variables = {};
 
-global types;
-types = [
-    "int",
-    "char",
-    "str",
-    "arr",
-    "fn"
+# characters that cannot be in function, variable or datatype identifier. There is a special case for functions as they require () to define inputs.
+special_characters = [
+    "[",
+    "]",
+    "{",
+    "}",
+    ";",
+    "/",
+    "\\",
+    "(",
+    ")"
 ];
 
-global fn_types;
-fn_types = [
-    "null",
-    "int",
-    "char",
-    "arr",
-    "str"
-];
-
-global const;
-const = {
-    "PI": 3.1415926,
-    "E": 2.7182818
-};
-
-global fn_builtins;
-fn_builtins = {
-    "sin": sin,
-    "cos": cos,
-    "tan": tan,
-    "print": print,
-    "log": log,
-    "log10": log10,
-    "sqrt": sqrt,
-    "ceil": ceil,
-    "abs": abs
-};
-
-global fn_user;
-fn_user = {};
-
-global output;
-output = {};
-
-global output_index;
-output_index = 0;
+types = {
+    "int": {},
+    "char": {},
+    "string": {},
+    "null": {},     # This is the equivalent to void in c
+}

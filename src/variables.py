@@ -1,0 +1,3 @@
+
+def define_variable(line: str):
+    ...
