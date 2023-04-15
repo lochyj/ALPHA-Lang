@@ -1,10 +1,7 @@
-e = {"e": {"value": "val", "type": "int"}};
+test = {"a": {"e": "yes", "b": "no"}}
 
+print(test)
 
-a = {
-    "a": {"value": "val", "type": "int"}
-};
+test["a"].update({"e": "no"})
 
-a.update(e);
-
-print(a)
+print(test)

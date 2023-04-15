@@ -48,3 +48,5 @@ types = {
     "string": {},
     "null": {},     # This is the equivalent to void in c
 }
+
+fn_type = "fn"

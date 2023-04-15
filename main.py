@@ -1,8 +1,15 @@
 import src.values as values
+from src.parse import parse_mid_file
 from src.util import *
 
 file = open("file.mid");
 file_contents = file.read();
+
+parse_mid_file(file_contents);
+
+print(values.variables)
+
+exit();
 
 split_line = file_contents.replace('\n', ' ').split(' ');
 
