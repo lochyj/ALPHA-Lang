@@ -22,7 +22,7 @@ int TokenizeFile(char* file_dir) {
 int TokenizeLine(std::string line, int line_num, int line_len) {
     bool in_comment = false;
     for (int i = 0; i < line_len; i++) {
-        printf("%s\n", CURRENT(line));
+        printf("%c\n", CURRENT(line));
         if (isspace(CURRENT(line)))
             continue;
 
