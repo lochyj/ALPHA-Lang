@@ -1,14 +1,15 @@
-#include <cstdio>
-#include <vector>
 #include <string>
+#include <vector>
 
-#include "lexer.hpp"
+#include "ALPHA/lexer.hpp"
 
 int main(int argc, char* argv[]) {
-    // TEMP
-    char* input_file = argv[1];
+    std::cout << argv[0] << '\n';
+    std::cout << argv[1] << '\n';
+    if (argc < 2)
+        std::cout << "No target file specified...\n";
+        return 1;
+    std::vector<Token_T> tokens = tokenize_file(realpath(argv[1], NULL));
 
-    std::string line = "int a = 10;";
-
-    TokenizeLine(line, 1, line.size());
+    return 0;
 }

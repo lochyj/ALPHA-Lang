@@ -49,6 +49,11 @@
         "xmemory": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "cwctype": "cpp",
+        "numbers": "cpp",
+        "string_view": "cpp",
+        "sstream": "cpp"
     }
 }

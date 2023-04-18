@@ -1,48 +1,52 @@
-#include <iostream>
-#include <fstream>
-#include <cstdbool>
+#include "ALPHA/lexer.hpp"
 
-#include "lexer.hpp"
+#define CURRENT(line) (line[i])
+#define NEXT(line) (i + 1 < (int)line.size() ? line[i + 1] : 0)
+#define PREVIOUS(line) (line.size() > 0 && i - 1 >= 0 ? line[i - 1] : 0)
 
-// From https://github.com/Electrux/Ethereal/blob/master/src/FE/Lexer.cpp
-#define CURRENT( line ) ( line[ i ] )
-#define NEXT( line ) ( i + 1 < ( int )line.size() ? line[ i + 1 ] : 0 )
-#define PREVIOUS( line ) ( line.size() > 0 && i - 1 >= 0 ? line[ i - 1 ] : 0 )
+std::vector<Token_T> tokenize_file (char* file_path) {
+    std::vector<Token_T> tokens;
 
+    std::cout << "Called... " << file_path << '\n';
 
-int TokenizeFile(char* file_dir) {
-    // std::ifstream file;
-    // file.open(file_dir, std::ios::in);
-    // std::string data;
-    // file >> data;
-    return 0;
-}
+    std::ifstream file(file_path);
 
-// int a = 10; int b = 20;
-int TokenizeLine(std::string line, int line_num, int line_len) {
+    if (!file.is_open())
+        std::cout << "ERROR Cannot open: " << file_path << '\n';
+
+    std::string code;
+
+    if(file) {
+      std::ostringstream ss;
+      ss << file.rdbuf(); // reading data
+      code = ss.str();
+    }
+
+    std::cout << code;
+
     bool in_comment = false;
-    for (int i = 0; i < line_len; i++) {
-        printf("%c\n", CURRENT(line));
-        if (isspace(CURRENT(line)))
-            continue;
+    bool in_string = false;
+    int i = 0;
 
-        if (CURRENT(line) == '*' && NEXT(line) == '/') {
-            i++;
+    while (!file.eof()) {
+        i++;
+        if (CURRENT(code) == ' ') {
+            continue;
+        }
+
+        if (CURRENT(code) == '*' && CURRENT(code) == '/') {
             in_comment = false;
             continue;
         }
-        
+
         if (in_comment)
             continue;
 
-        if (CURRENT(line) == '/' && NEXT(line) == '/') {
-            return 0;
-        }
-
-        if (CURRENT(line) == '/' && NEXT(line) == '*') {
+        if (CURRENT(code) == '/' && CURRENT(code) == '*') {
             in_comment = true;
             continue;
         }
     }
-    return 0;
+
+    return tokens;
 }
