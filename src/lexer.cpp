@@ -7,46 +7,53 @@
 std::vector<Token_T> tokenize_file (char* file_path) {
     std::vector<Token_T> tokens;
 
-    std::cout << "Called... " << file_path << '\n';
-
     std::ifstream file(file_path);
 
-    if (!file.is_open())
+    if (!file.is_open()) {
         std::cout << "ERROR Cannot open: " << file_path << '\n';
-
-    std::string code;
-
-    if(file) {
-      std::ostringstream ss;
-      ss << file.rdbuf(); // reading data
-      code = ss.str();
     }
 
-    std::cout << code;
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+
+    std::string code = buffer.str();
 
     bool in_comment = false;
     bool in_string = false;
-    int i = 0;
 
-    while (!file.eof()) {
-        i++;
-        if (CURRENT(code) == ' ') {
-            continue;
-        }
 
-        if (CURRENT(code) == '*' && CURRENT(code) == '/') {
+    for (int i = 0; i < code.length(); i++) {
+
+        if (CURRENT(code) == '*' && NEXT(code) == '/') {
             in_comment = false;
+            i++;
             continue;
         }
 
         if (in_comment)
             continue;
 
-        if (CURRENT(code) == '/' && CURRENT(code) == '*') {
+        if (CURRENT(code) == '/' && NEXT(code) == '*') {
             in_comment = true;
+            i++;
             continue;
         }
+
+
+
+        std::cout << CURRENT(code) << std::endl;
+
     }
 
     return tokens;
+}
+
+char* operators[3] {
+    "int",
+    "string",
+    "char",
+}
+
+bool is_operator_char(char op_char) {
+    return false;
 }
