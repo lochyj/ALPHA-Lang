@@ -54,6 +54,10 @@
         "cwctype": "cpp",
         "numbers": "cpp",
         "string_view": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "functional": "cpp"
     }
 }

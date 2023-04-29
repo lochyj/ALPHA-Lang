@@ -10,13 +10,15 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 #define RED  "\x1B[31m"
 
 enum TYPE {
     WORD,
-    OPERATOR,
-    STRING
+    DELINEATOR,
+    STRING,
+    INT,
 };
 
 typedef struct Token {
@@ -29,5 +31,4 @@ typedef struct Token {
 
 std::vector<Token_T> tokenize_file (char* file_path);
 
-bool is_operator_char(char op_char, int op_index);
-bool is_operator_str(std::string str);
+static bool is_delineator(char character);

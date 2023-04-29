@@ -1,9 +1,9 @@
 #include "ALPHA/lexer.hpp"
 
-#define CURRENT(line) (line[i])
-#define NEXT(line) (i + 1 < (int)line.size() ? line[i + 1] : 0)
-#define NEXT2(line) (i + 2 < (int)line.size() ? line[i + 2] : 0)
-#define PREVIOUS(line) (line.size() > 0 && i - 1 >= 0 ? line[i - 1] : 0)
+#define CURRENT(line) ((char)(line[i]))
+#define NEXT(line) ((char)(i + 1 < (int)line.size() ? line[i + 1] : 0))
+#define NEXT2(line) ((char)(i + 2 < (int)line.size() ? line[i + 2] : 0))
+#define PREVIOUS(line) ((char)(line.size() > 0 && i - 1 >= 0 ? line[i - 1] : 0))
 
 std::vector<Token_T> tokenize_file (char* file_path) {
     std::vector<Token_T> tokens;
@@ -24,11 +24,8 @@ std::vector<Token_T> tokenize_file (char* file_path) {
     std::string string_segment;
     int id = 0;
 
-    int operator_index = 0;
-    bool is_operator = false;
-    std::string operator_str;
-
     for (int i = 0; i < code.length(); i++) {
+        std::cout << "E: ";
 
         if (CURRENT(code) == '*' && NEXT(code) == '/') {
             in_comment = false;
@@ -44,96 +41,93 @@ std::vector<Token_T> tokenize_file (char* file_path) {
             i++;
             continue;
         }
-
-        if (CURRENT(code) == '"') {
-            in_string = !in_string;
-        } else if (CURRENT(code) == '\'') {
-            if (NEXT2(code) != '\'') {
-                printf("Error: Unexpected character at end of char definition: %c%c%c <- Here\n", CURRENT(code), NEXT(code), NEXT2(code));
-                printf("                                                         ^\n");
-                printf("Suggested: Replace with \"'\"\n");
-                break;
+        
+        if (!in_string) {
+            if (CURRENT(code) == '"') {
+                in_string = true;
+                std::cout << CURRENT(code) << '\n';
+                continue;
             }
         }
 
         if (in_string) {
-            if (CURRENT(code) == ' ') {
+            if (CURRENT(code) == '"') {
+                std::cout << "A: ";
+
                 tokens[id].symbol = string_segment;
                 tokens[id].id = id;
-                tokens[id].type = TYPE::STR;
+                tokens[id].type = TYPE::STRING;
                 tokens[id].column = 10;
                 tokens[id].line = 10;
                 id++;
-                string_segment = "";
+                std::cout << string_segment << '\n';
+                string_segment = '\0';
+                in_string = false;
                 continue;
+            } else {
+                string_segment.push_back(CURRENT(code));
             }
-            string_segment += CURRENT(code);
+            std::cout << CURRENT(code) << '\n';
             continue;
         }
 
-        if (is_operator_char(CURRENT(code), operator_index)) {
-            std::cout << "Operator char: " << CURRENT(code) << std::endl;
-            operator_str += CURRENT(code);
-            operator_index++;
-            is_operator = true;
+        if (is_delineator(CURRENT(code))) {
+            tokens[id].symbol.push_back(CURRENT(code));
+            tokens[id].id = id;
+            tokens[id].type = TYPE::DELINEATOR;
+            tokens[id].column = 10;
+            tokens[id].line = 10;
+            id++;
 
-            if (!is_operator_char(NEXT(code), operator_index)) {
-                if (is_operator_str(operator_str)) {
-                    std::cout << "Operator: " << operator_str << std::endl;
-                    tokens[id].type = TYPE::OP;
-                    tokens[id].symbol = operator_str;
-                    tokens[id].line = 10;    // 10 is temp
-                    tokens[id].column = 10;  // 10 is temp
-                    tokens[id].id = id;
-                    id++;
-                    std::cout << "Added operator";
-                }
-            }
+            std::cout << "Delineator: " << CURRENT(code) << '\n';
 
             continue;
-        } else if (operator_index > 0) {
-            operator_index = 0;
-            operator_str = "";
-            is_operator = false;
         }
 
-
-
-        std::cout << CURRENT(code) << std::endl;
+        std::cout << CURRENT(code) << '\n';
 
     }
 
     return tokens;
 }
 
-// TODO: make this an array of vectors. maybe...
 
-const std::string operators[7] = {
-    "int",
-    "string",
-    "char",
-    "for",
-    "struct",
-    "while",
-    "do",
+// These characters delineate words such as: <word> & <word> where "&" is a delineator.
+// Its function isn't necessary in this context and will be determined later.
+std::vector<char> delineators = {
+    ';',
+    '(',
+    ')',
+    '{',
+    '}',
+    '[',
+    ']',
+    '.',
+    '=',
+    '*',
+    '^',
+    '&',
+    '-',
+    '+',
+    '@',
+    '#',
+    '$',
+    '%',
+    '~',
+    '"',
+    '\'',
+    '\\',
+    '|',
+    '<',
+    '>',
 };
 
-int operators_len = 7;
-
-bool is_operator_char(char op_char, int op_index) {
-    for (int i = 0; i < operators_len; i++) {
-        if (operators[i][op_index] == op_char) {
-            return true;
-        }
+static bool is_delineator(char character) {
+    std::cout << "\nIs Delin: " << character;
+    if (std::find(delineators.cbegin(), delineators.cend(), character) != delineators.cend()) {
+        std::cout << "True\n";
+        return true;
     }
-    return false;
-}
-
-bool is_operator_str(std::string str) {
-    for (int i = 0; i < operators_len; i++) {
-        if (operators[i].compare(str)) {
-            return true;
-        }
-    }
+    std::cout << "False\n";
     return false;
 }
