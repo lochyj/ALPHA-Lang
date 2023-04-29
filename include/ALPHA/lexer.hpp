@@ -14,11 +14,9 @@
 #define RED  "\x1B[31m"
 
 enum TYPE {
-    ID,
-    OP,
-    INT,
-    STR,
-    CHR,
+    WORD,
+    OPERATOR,
+    STRING
 };
 
 typedef struct Token {
