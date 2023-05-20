@@ -1,2 +1,0 @@
-fn int add (x) return x + 10;
-fn add 10
