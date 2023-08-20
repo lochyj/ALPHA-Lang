@@ -1,2 +1,2 @@
-gcc ./main.c
-./a.out lang.al
+gcc ./main.c -o ./build/alpha
+./build/alpha ./lang.al
